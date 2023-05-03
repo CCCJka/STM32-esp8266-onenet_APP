@@ -9,10 +9,10 @@
 
 int main(void)
 {
-	const char *Subtopics[] = {"/deviceSub/fanspeed"};	//¶©ÔÄÊı¾İ
-	const char *Pubtopics = {"/devicePub/fanspeed	"};		//·¢²¼Êı¾İ
+	const char *Subtopics[] = {"xxxxxxxxxxxx"};	//è®¢é˜…æ•°æ®
+	const char *Pubtopics = {"xxxxxxxxxxx"};		//å‘å¸ƒæ•°æ®
 	
-	unsigned short timeCount = 0;	//·¢ËÍ¼ä¸ô±äÁ¿
+	unsigned short timeCount = 0;	//å‘é€é—´éš”å˜é‡
 	
 	unsigned char *dataPtr = NULL;
 
@@ -23,24 +23,24 @@ int main(void)
 	Motor_Init();
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
-	Usart1_Init(115200);							//´®¿Ú1£¬´òÓ¡ĞÅÏ¢
-	Usart2_Init(115200);							//´®¿Ú2£¬Çı¶¯ESP8266
+	Usart1_Init(115200);							//ä¸²å£1ï¼Œæ‰“å°ä¿¡æ¯
+	Usart2_Init(115200);							//ä¸²å£2ï¼Œé©±åŠ¨ESP8266
 	UsartPrintf(USART_DEBUG, " Hardware init OK\r\n");
 	
 	ESP8266_Init();
 	
-	OneNet_DevLink();		//½ÓÈëOneNET
+	OneNet_DevLink();		//æ¥å…¥OneNET
 	Delay_ms(250);
 
 	OneNet_Subscribe(Subtopics, 1);
 	
 	while(1)
 	{
-		if(++timeCount >= 500)									//·¢ËÍ¼ä¸ô5s
+		if(++timeCount >= 500)									//å‘é€é—´éš”5s
 		{
 			UsartPrintf(USART_DEBUG, "OneNet_Publish\r\n");
-			sprintf(pub_buf,"{\"fanspeed\":%d}",speed);
-			OneNet_Publish(Pubtopics, pub_buf);
+			sprintf(pub_buf,"{\"fanspeed\":%d}",speed);		//æŠŠåŒå¼•å·å†…çš„å­—ç¬¦æ•´åˆæˆå­—ç¬¦ä¸²
+			OneNet_Publish(Pubtopics, pub_buf);			//å‘å¸ƒæŒ‡ä»¤ï¼Œä¹Ÿå°±æ˜¯ä¸‹å‘å‘½ä»¤
 			timeCount = 0;
 			ESP8266_Clear();
 		}

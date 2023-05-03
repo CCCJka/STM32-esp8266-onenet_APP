@@ -30,9 +30,9 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String Device_ID = "1076205432";        //设备id
-    private String api_key = "PkGbK=02duescpR4ZK6=PLoDpmo=";
-    //http://api.heclouds.com/devices/1076205432  API地址
+    private String Device_ID = "xxxxxxx";//填写单片机的设备id
+    private String api_key = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx";//填写单片机申请的apikey
+    //http://api.heclouds.com/devices/Device_ID  API地址
 
 
     private String str;
@@ -47,10 +47,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         send = (Button)findViewById(R.id.send);
         tv = (TextView) findViewById(R.id.showrec);
+        
+        //加入这段判断后可以连接到onenet平台，否则点击按钮只会报错
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        
+        //按钮的点击事件
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
